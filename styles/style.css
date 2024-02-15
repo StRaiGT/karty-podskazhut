@@ -1,14 +1,33 @@
+:root {
+  --main-font: "Raleway";
+  --accent-font: "STIX Two Text";
+  --bg-color: #f3efec;
+  --text-color: #312a4e;
+  --accent-color: #ffab6b;
+}
+
+.theme_dark {
+  --bg-color: #171717;
+  --text-color: #b3b3b3;
+  --accent-color: transparent;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* общие стили страницы */
 .page {
-  min-inline-size: 360px;
   margin: 0;
+  color: var(--text-color, #312a4e);
+  font-family: var(--main-font, sans-serif);
+  background-color: var(--bg-color, #f3efec);
+  min-inline-size: 360px;
 }
 
+/* сбрасываем все внешние отступы */
 p,
 h1,
 h2,
@@ -19,4 +38,268 @@ ol,
 li,
 figure {
   margin: 0;
+}
+
+/* убираем стандартные рамки */
+a:focus,
+button:focus {
+  outline: none;
+}
+
+/* задаем свои рамки */
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid currentColor;
+}
+
+/* отключаем возможность нажать на кнопку */
+button:disabled {
+  pointer-events: none;
+}
+
+/* внутренний отступ для header */
+.header {
+  padding-top: 10vw;
+}
+
+/* общие стили заголовков h1, h2, h3 */
+.heading {
+  font-family: var(--accent-font, serif);
+  font-weight: 600;
+  line-height: 0.9;
+  text-align: center;
+}
+
+/* стили заголовков h1 */
+.header__title {
+  margin-block-end: 40px;
+  font-size: clamp(3.75rem, 2.5rem + 5.5556vw, 7.5rem);
+}
+
+.content {
+}
+
+/* внутренний отступ для main и заголовка h1 */
+.content-section {
+  padding: 0 5vi;
+}
+
+/* стили блока nav */
+.header__menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-block-start: 1px solid currentColor;
+  border-block-end: 1px solid currentColor;
+  padding-block: 20px;
+}
+
+/* стили списка с кнопками */
+.header__theme-toggler {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+/* общие стили кнопок */
+.header__theme-button {
+  position: relative;
+  border: none;
+  padding: 0;
+  color: currentColor;
+  font-family: inherit;
+  font-size: 18px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* подчеркивание при наведении на кнопку */
+.header__theme-button:hover {
+  text-decoration: underline;
+}
+
+/* стили активной кнопки */
+.header__theme-button_is-active {
+  font-weight: 700;
+}
+
+/* выделяем активную кнопку и позиционируем его */
+.header__theme-button_is-active::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--accent-color);
+  block-size: 0.5ch;
+  inset-block-end: 0.3ch;
+  inline-size: calc(100% + 8px);
+  inset-inline-start: -4px;
+}
+
+/* стили заголовков h2 */
+.content__title {
+  margin: 7% 0 2.5%;
+  font-size: 30px;
+}
+
+/* общий размер шрифта для всех div */
+.content__text-block {
+  font-size: 18px;
+}
+
+/* выделяем первую букву первого p в div */
+.content__text-block_type_first-lettered
+  .content__paragraph:first-of-type:first-letter {
+  display: inline-block;
+  margin-inline-end: 1px;
+  padding: 0 4px;
+  font-weight: 700;
+  font-size: 30px;
+  background-color: var(--accent-color);
+}
+
+/* общий отступ для всех p внутри div, кроме последнего p */
+.content__text-block .content__paragraph:not(:last-of-type) {
+  margin-block-end: 1.5em;
+}
+
+/* стили блока с картинкой и описанием */
+.content__figure {
+  position: relative;
+  margin: 7% auto;
+  /* 100% родителя + ширина полей */
+  inline-size: calc(100% + 10vi);
+  inset-inline-end: 5vi;
+}
+
+/* стили картинки */
+.content__picture {
+  inline-size: 100%;
+}
+
+/* стили описания картинки */
+.content__picture-caption {
+  border-block-end: 1px solid currentColor;
+  padding: 20px;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* стили для цитаты */
+.content__blockquote {
+  margin: 0 auto 1.5em;
+  font-style: italic;
+  line-height: 2;
+  inline-size: 75%;
+}
+
+/* наследуем цвет для ссылок */
+.content__text-block a {
+  color: inherit;
+}
+
+/* стили блока с карточкой */
+.content__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: 7%;
+  border: 1px solid currentColor;
+  /* задаем пропорции */
+  aspect-ratio: 4/3;
+}
+
+/* стили заголовка карточки */
+.content__card-title {
+  font-size: 60px;
+}
+
+/* задаем относительное позиционирование выделяемому блоку в h3 карточки */
+.colored-text {
+  position: relative;
+  display: inline-block;
+}
+
+/* выделяем блок в h3 карточки и позиционируем его */
+.colored-text::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--accent-color);
+  block-size: 0.5ch;
+  inset-block-end: 0.3ch;
+  inline-size: calc(100% + 8px);
+  inset-inline-start: -4px;
+}
+
+/* стили подзаголовка карточки */
+.content__card-subtitle {
+  font-size: 18px;
+}
+
+/* задаем отступы для списка и скрываем маркеры по умолчанию */
+.content__list {
+  padding: 0 0 0 40px;
+  list-style: none;
+}
+
+/* каждому элементу списка задаем относительное позиционирование */
+.content__list li {
+  position: relative;
+}
+
+/* задаем отступы для элементов списка, кроме последнего */
+.content__list li:not(:last-of-type) {
+  margin-block-end: 10px;
+}
+
+/* задаем свои маркеры и позиционируем их */
+.content__list li::before {
+  content: "";
+  position: absolute;
+  margin-block-start: -7.5px;
+  background-image: url(../images/marker-light.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  inline-size: 15px;
+  block-size: 15px;
+  inset-inline-start: -25px;
+  inset-block-start: 50%;
+}
+
+/* стили для подвала */
+.footer {
+  margin-block-start: 10%;
+  border-block-start: 1px solid currentColor;
+  padding: 2.5%;
+  text-align: center;
+}
+
+/* стили для текста подвала */
+.footer__copyright {
+  font-size: 18px;
+}
+
+/* меняем стиль выделения блока в h3 карточки */
+.theme_dark .colored-text::after {
+  background-image: url(../images/pattern.svg);
+}
+
+/* меняем стиль выделения активной кнопки */
+.theme_dark .header__theme-button_is-active::after {
+  background-image: url(../images/pattern.svg);
+}
+
+/* меняем стиль выделения первой буквы первого p в div */
+.theme_dark
+  .content__text-block_type_first-lettered
+  .content__paragraph:first-of-type:first-letter {
+  border: 1px solid currentColor;
+}
+
+/* меняем свои маркеры */
+.theme_dark .content__list li::before {
+  background-image: url(../images/marker-dark.svg);
 }
